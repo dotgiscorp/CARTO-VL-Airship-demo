@@ -1,24 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { defineCustomElements } from '@carto/airship-components/dist/loader';
 import './style.scss';
 
 defineCustomElements(window);
 
-const Sidebar = ({ data, setFilter }) => {
+const Sidebar = ({ data }) => {
 
-  const HISTOGRAM_REF = useRef();
+  const histogramRef = useRef(null);
   const [histogramData, setHistogramData] = useState(null);
-
-  useEffect(() => {
-    HISTOGRAM_REF.current.addEventListener('selectionChanged', event => {
-      if (event.detail === null) {
-        setFilter('');
-      } else {
-        const filterString = `between($description, ${event.detail.selection[0]}, ${event.detail.selection[1]})`;
-        setFilter(filterString);
-      }
-    });
-  }, []);
 
   useEffect(() => {
     setHistogramData(data.map(values => ({
@@ -29,14 +19,16 @@ const Sidebar = ({ data, setFilter }) => {
   }, [data]);
 
   useEffect(() => {
-    HISTOGRAM_REF.current.data = histogramData;
+    histogramRef.current.data = histogramData;
   }, [histogramData]);
 
   return (
     <div className="sidebar-container">
       <div className="sidebar-container-histogram">
         <as-histogram-widget
-            ref={HISTOGRAM_REF}
+            ref={histogramRef}
+            disable-interactivity
+            responsive
             heading="Type"
             show-header
             show-clear>
@@ -44,6 +36,10 @@ const Sidebar = ({ data, setFilter }) => {
       </div>
     </div>
     );
+};
+
+Sidebar.propTypes = {
+	data: PropTypes.array.isRequired
 };
 
 export default Sidebar;

@@ -10,24 +10,12 @@ const LAYER_CONFIG = {
 
 class Layer extends React.Component {
 
-  state = {
-      viz: null
-  };
-
   static propTypes = {
     map: PropTypes.any.isRequired
   };
 
   componentDidMount() {
       this._addLayer();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { filter } = this.props;
-
-    if (nextProps.filter !== filter) {
-      this._updateVizProp(filter);
-    };
   }
 
   _addLayer = () => {
@@ -39,9 +27,10 @@ class Layer extends React.Component {
     });
 
     const viz = new carto.Viz(`
-      @v_histogram: viewportHistogram($description)
+      @v_histogram: viewportHistogram($description, [[1, 2], [2, 3], [3, 4], [4, 5]])
       color: opacity(ramp($description, BOLD), .6)
       strokeColor: rgb(0, 255, 153)
+      width: 75 * animation($description, 5, fade(1, 2))
       strokeWidth: 2
     `);
 
@@ -53,35 +42,12 @@ class Layer extends React.Component {
       throw new Error (`Could not render the layer: ${err}`)
     };
 
-    this.setState({
-        viz: viz
-    });
-
     layer.on('updated', () => {
       const histogram = layer.viz.variables.v_histogram;
       const histogramData = histogram.value;
       this.props.onViewportHistogram(histogramData);
     });
   };
-
-  _handleError = (error) => {
-    const err = `Invalid viz: ${error}:${error.stack}`;
-    console.warn(err);
-  };
-
-  _updateVizProp = (value) => {
-    const { viz } = this.state;
-
-    try {
-      if (viz) {
-        viz['filter'].blendTo(value).catch(error => {
-          this._handleError(error);
-        });
-      }
-    } catch (error) {
-      this._handleError(error);
-    }
-  }
 
   render() {
     return null;

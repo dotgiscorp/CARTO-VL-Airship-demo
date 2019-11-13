@@ -1,14 +1,25 @@
+$mobile-breakpoint: 414px;
+
+@mixin respond-to($media) {
+    @if $media == mobile {
+      @media only screen and (max-width: $mobile-breakpoint) {
+        @content;
+      }
+    }
+  }
+
 .sidebar-container {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    width: 300px;
-    height: 100%;
-    right: 0;
+    position: relative;
     background-color: white;
     padding: 1rem;
 
     &-histogram {
         height: 300px;
+
+        @include respond-to(mobile) {
+            as-histogram-widget {
+                width: 100%;
+            }
+        }
     }
 }

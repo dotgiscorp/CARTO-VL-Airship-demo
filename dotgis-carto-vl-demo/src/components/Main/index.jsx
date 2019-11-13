@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactMapboxGL, { MapContext } from 'react-mapbox-gl';
 import Layer from '../Layer';
 import Sidebar from '../Sidebar';
@@ -9,33 +9,28 @@ const Map = ReactMapboxGL({
 
 const MAP_CONFIG = {
   BASEMAP: 'mapbox://styles/dotgis/cjy5jaxp10qyc1cqurvmoc05v',
-  CENTER: [-0.48, 38.701],
-  ZOOM: [15],
+  CENTER: [-0.48, 38.71],
+  ZOOM: [14],
   PITCH: [60]
 }
 
 class Main extends React.Component {
 
   state = {
-    mainData: [],
-    mapFilter: ''
+    mainData: []
   }
 
   render() {
-    const { mainData, mapFilter } = this.state;
+    const { mainData } = this.state;
 
     return (
-      <div>
+      <Fragment>
         <Map
           style={MAP_CONFIG.BASEMAP}
           center={MAP_CONFIG.CENTER}
           zoom={MAP_CONFIG.ZOOM}
           pitch={MAP_CONFIG.PITCH}
-          containerStyle={{
-            position: 'absolute',
-            height: '100%',
-            width: '100%'
-          }}
+          containerStyle={{ position: 'absolute', height: '100%', width: '100%' }}
         >
           <MapContext.Consumer>
             {map => 
@@ -44,19 +39,12 @@ class Main extends React.Component {
                 onViewportHistogram={data => {
                   this.setState({ mainData: data })
                 }}
-                filter={mapFilter}
               />
             }
           </MapContext.Consumer>
         </Map>
-        {mainData &&
-          <Sidebar
-            data={mainData}
-            setFilter={filter => {
-              this.setState({ mapFilter: filter })
-            }}
-        />}
-      </div>
+        {mainData && <Sidebar data={mainData} />}
+      </Fragment>
     );
   }
 }

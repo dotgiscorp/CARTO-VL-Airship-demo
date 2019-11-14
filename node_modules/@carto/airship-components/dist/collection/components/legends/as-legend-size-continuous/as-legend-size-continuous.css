@@ -1,0 +1,6 @@
+as-legend-size-continuous {
+  display: block;
+}
+as-legend-size-continuous .as-legend-size-continuous--overflow {
+  overflow: hidden;
+}

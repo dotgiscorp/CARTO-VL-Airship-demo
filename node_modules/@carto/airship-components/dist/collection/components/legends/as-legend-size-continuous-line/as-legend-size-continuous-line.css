@@ -1,0 +1,13 @@
+as-legend-size-continuous-line {
+  display: block;
+  overflow: hidden;
+}
+as-legend-size-continuous-line svg text {
+  font: var(--as--font--caption);
+}
+as-legend-size-continuous-line svg line {
+  stroke: var(--as-legend--color);
+}
+as-legend-size-continuous-line svg.as-legend-size-continuous-line--horizontal text {
+  text-anchor: middle;
+}

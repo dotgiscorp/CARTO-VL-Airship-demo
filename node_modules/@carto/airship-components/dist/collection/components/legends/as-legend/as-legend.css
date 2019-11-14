@@ -1,0 +1,23 @@
+as-legend {
+  --as-legend--color: var(--as--color--type-01);
+  --as-legend--background-color: var(--as--color--ui-01);
+  --as-legend--footer-font-size: 12px;
+  --as-legend--footer-color: var(--as--color--type-01);
+  --as-legend--footer-margin-top: 12px;
+  --as-legend--padding: 12px;
+  background: var(--as-legend--background-color);
+  color: var(--as-legend--color);
+}
+as-legend .as-legend--wrapper {
+  padding: var(--as-legend--padding);
+}
+as-legend *[slot=footer] {
+  display: block;
+  margin-top: var(--as-legend--footer-margin-top);
+  color: var(--as-legend--footer-color);
+  font-family: var(--as--font-family--base);
+  font-size: var(--as-legend--footer-font-size);
+}
+as-legend .as-legend--legends-slot {
+  overflow: auto;
+}

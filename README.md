@@ -2,6 +2,8 @@
 
 A tiny React app showing up how to connect CARTO VL with Airship :bento:
 
+<img src="./app-thumb.png" alt="app Thumb">
+
 [Airship](https://carto.com/developers/airship/) is a set of tools designed to facilitate the development of location intelligence apps by offering layouts, basic patterns, templates, CSS classes, components, widgets and much more.
 
 [CARTO VL](https://carto.com/developers/carto-vl/) is a JavaScript library that interacts with different CARTO APIs to build custom apps leveraging vector rendering.

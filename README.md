@@ -1,6 +1,6 @@
 # CARTO VL & Airship [demo](https://dotgiscorp.github.io/CARTO-VL-Airship-demo/)
 
-A tiny React app showing up how to connect CARTO VL with Airship :bento:
+:bento: A tiny React app showing up how to connect CARTO VL with Airship :bento:
 
 <img src="./app-thumb.png" alt="app Thumb">
 
